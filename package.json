@@ -1,0 +1,11 @@
+{
+  "name": "nx_table_api",
+  "version": "1.0.0",
+  "description": "Second version of the nxtable api",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon start"
+  },
+  "author": "Tomàs Morató",
+  "license": "MIT"
+}
