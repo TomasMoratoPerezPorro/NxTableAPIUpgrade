@@ -4,8 +4,16 @@
   "description": "Second version of the nxtable api",
   "main": "server.js",
   "scripts": {
-    "test": "nodemon start"
+    "start": "node server",
+    "server": "nodemon server"
   },
   "author": "Tomàs Morató",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
