@@ -5,12 +5,26 @@ module.exports = {
       tableId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        references: {
+          model: {
+            tableName: 'tables'
+            /* schema: 'nx_table_development' */
+          },
+          key: 'id'
+        }
       },
       reservationId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        references: {
+          model: {
+            tableName: 'reservations'
+            /* schema: 'nx_table_development' */
+          },
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

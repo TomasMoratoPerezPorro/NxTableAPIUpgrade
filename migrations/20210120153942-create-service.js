@@ -10,6 +10,13 @@ module.exports = {
       },
       restaurantId: {
         type: DataTypes.INTEGER,
+        references: {
+          model: {
+            tableName: 'restaurants'
+            /* schema: 'nx_table_development' */
+          },
+          key: 'id'
+        },
         allowNull: false
       },
       name: {

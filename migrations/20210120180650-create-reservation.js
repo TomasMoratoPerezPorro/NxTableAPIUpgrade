@@ -10,18 +10,46 @@ module.exports = {
       },
       clientId: {
         type: DataTypes.INTEGER,
+        references: {
+          model: {
+            tableName: 'clients'
+            /* schema: 'nx_table_development' */
+          },
+          key: 'id'
+        },
         allowNull: false
       },
       serviceId: {
         type: DataTypes.INTEGER,
+        references: {
+          model: {
+            tableName: 'services'
+            /* schema: 'nx_table_development' */
+          },
+          key: 'id'
+        },
         allowNull: false
       },
       shiftId: {
         type: DataTypes.INTEGER,
+        references: {
+          model: {
+            tableName: 'shifts'
+            /* schema: 'nx_table_development' */
+          },
+          key: 'id'
+        },
         allowNull: false
       },
       restaurantId: {
         type: DataTypes.INTEGER,
+        references: {
+          model: {
+            tableName: 'restaurants'
+            /* schema: 'nx_table_development' */
+          },
+          key: 'id'
+        },
         allowNull: false
       },
       date: {

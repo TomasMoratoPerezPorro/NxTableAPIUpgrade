@@ -10,6 +10,13 @@ module.exports = {
       },
       serviceId: {
         type: DataTypes.INTEGER,
+        references: {
+          model: {
+            tableName: 'services'
+            /* schema: 'nx_table_development' */
+          },
+          key: 'id'
+        },
         allowNull: false
       },
       shiftNum: {
