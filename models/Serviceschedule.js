@@ -7,30 +7,30 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ Service }) {
+      this.belongsTo(Service, { foreignKey: 'serviceId' });
     }
   }
   ServiceSchedule.init(
     {
-      serviceId: {
+      /* serviceId: {
         type: Sequelize.INTEGER,
         allowNull: false
-      },
+      }, */
       openingTime: {
-        type: Sequelize.TIME,
+        type: DataTypes.TIME,
         allowNull: false
       },
       lastAdmisionTime: {
-        type: Sequelize.TIME,
+        type: DataTypes.TIME,
         allowNull: false
       },
       weekDay: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       isVacation: {
-        type: Sequelize.BOOLEAN
+        type: DataTypes.BOOLEAN
       }
     },
     {

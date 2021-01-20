@@ -2,19 +2,15 @@
 module.exports = {
   up: async (queryInterface, DataTypes) => {
     await queryInterface.createTable('tableReservations', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER
-      },
       tableId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
       },
       reservationId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
       },
       createdAt: {
         allowNull: false,

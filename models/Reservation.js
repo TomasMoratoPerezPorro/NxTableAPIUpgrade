@@ -7,13 +7,18 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate({ Table, Restaurant, Client, Service, Shift }) {
       // define association here
+      this.belongsToMany(Table, { through: 'TableReservation' });
+      this.belongsTo(Restaurant, { through: 'restaurantId' });
+      this.belongsTo(Client, { through: 'clientId' });
+      this.belongsTo(Service, { through: 'serviceId' });
+      this.belongsTo(Shift, { through: 'shiftId' });
     }
   }
   Reservation.init(
     {
-      clientId: {
+      /* clientId: {
         type: DataTypes.INTEGER,
         allowNull: false
       },
@@ -28,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       restaurantId: {
         type: DataTypes.INTEGER,
         allowNull: false
-      },
+      }, */
       date: {
         type: DataTypes.DATE,
         allowNull: false

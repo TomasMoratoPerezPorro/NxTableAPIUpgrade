@@ -1,6 +1,5 @@
 'use strict';
 const { Model } = require('sequelize');
-const { all } = require('sequelize/types/lib/operators');
 module.exports = (sequelize, DataTypes) => {
   class Client extends Model {
     /**
@@ -8,16 +7,17 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ Restaurant, Reservation }) {
+      this.belongsTo(Restaurant, { foreignKey: 'restaurantId' });
+      this.hasMany(Reservation, { foreignKey: 'clientId' });
     }
   }
   Client.init(
     {
-      restaurantId: {
+      /* restaurantId: {
         type: DataTypes.INTEGER,
         allowNull: false
-      },
+      }, */
       uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4
