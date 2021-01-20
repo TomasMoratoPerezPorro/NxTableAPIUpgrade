@@ -1,28 +1,28 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable('restaurants', {
+    await queryInterface.createTable('shifts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4
-      },
-      name: {
-        type: DataTypes.STRING,
+      serviceId: {
+        type: DataTypes.INTEGER,
         allowNull: false
       },
-      location: {
-        type: DataTypes.STRING,
-        allowNull: true
+      shiftNum: {
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: true
+      startingTime: {
+        type: DataTypes.TIME,
+        allowNull: false
+      },
+      durationTime: {
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +35,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, DataTypes) => {
-    await queryInterface.dropTable('restaurants');
+    await queryInterface.dropTable('shifts');
   }
 };

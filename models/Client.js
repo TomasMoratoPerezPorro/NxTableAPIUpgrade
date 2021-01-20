@@ -1,44 +1,44 @@
 'use strict';
 const { Model } = require('sequelize');
+const { all } = require('sequelize/types/lib/operators');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Client extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Restaurant }) {
-      this.belongsToMany(Restaurant, { through: 'UserRestaurant' });
-    }
-
-    toJSON() {
-      return { ...this.get(), id: undefined };
+    static associate(models) {
+      // define association here
     }
   }
-  User.init(
+  Client.init(
     {
+      restaurantId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
       uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4
-      },
-      identifier: {
-        type: DataTypes.STRING,
-        allowNull: false
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      role: {
+      mobile: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      email: {
+        type: DataTypes.STRING
       }
     },
     {
       sequelize,
-      tableName: 'users',
-      modelName: 'User'
+      tableName: 'clients',
+      modelName: 'Client'
     }
   );
-  return User;
+  return Client;
 };

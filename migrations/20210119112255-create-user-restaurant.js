@@ -23,6 +23,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, DataTypes) => {
-    await queryInterface.dropTable('UserRestaurants');
+    await queryInterface.dropTable('userRestaurants');
   }
 };
