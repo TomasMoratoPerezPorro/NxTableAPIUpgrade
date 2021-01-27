@@ -3,7 +3,7 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 
-const { sequelize, Restaurant, User, UserRestaurant } = require('../../models');
+const { Restaurant, User } = require('../../models');
 
 // @route           POST api/restaurant
 // @description     Create a new restaurant and set the relation betwen user and restaurant
@@ -20,6 +20,10 @@ router.post(
     ]
   ],
   async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const { name, location, description } = req.body;
     try {
       let restaurant = await Restaurant.findOne({
