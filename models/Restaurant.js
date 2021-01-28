@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(Reservation, { foreignKey: 'restaurantId' });
       this.hasMany(Service, { foreignKey: 'restaurantId' });
     }
+
+    toJSON() {
+      return { ...this.get(), id: undefined };
+    }
   }
   Restaurant.init(
     {
