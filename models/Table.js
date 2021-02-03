@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Table.init(
     {
+      tableNumber: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
       maxCapacity: {
         type: DataTypes.INTEGER,
         allowNull: false

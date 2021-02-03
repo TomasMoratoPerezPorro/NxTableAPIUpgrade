@@ -19,6 +19,10 @@ module.exports = {
         },
         allowNull: false
       },
+      tableNumber: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
       maxCapacity: {
         type: DataTypes.INTEGER,
         allowNull: false
