@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable('serviceSchedules', {
+    await queryInterface.createTable('VacationPeriods', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,31 +19,11 @@ module.exports = {
         },
         allowNull: false
       },
-      weekdayId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: {
-            tableName: 'weekdays'
-            /* schema: 'nx_table_development' */
-          },
-          key: 'id'
-        },
-        allowNull: false
+      startingDate: {
+        type: DataTypes.DATE
       },
-      openingTime: {
-        type: DataTypes.TIME,
-        allowNull: false
-      },
-      lastAdmisionTime: {
-        type: DataTypes.TIME,
-        allowNull: false
-      },
-      weekDay: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      isVacation: {
-        type: DataTypes.BOOLEAN
+      endingDate: {
+        type: DataTypes.DATE
       },
       createdAt: {
         allowNull: false,
@@ -56,6 +36,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, DataTypes) => {
-    await queryInterface.dropTable('serviceSchedules');
+    await queryInterface.dropTable('VacationPeriods');
   }
 };

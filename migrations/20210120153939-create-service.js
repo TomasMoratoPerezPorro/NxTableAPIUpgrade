@@ -1,49 +1,35 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable('serviceSchedules', {
+    await queryInterface.createTable('services', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      serviceId: {
+      restaurantId: {
         type: DataTypes.INTEGER,
         references: {
           model: {
-            tableName: 'services'
+            tableName: 'restaurants'
             /* schema: 'nx_table_development' */
           },
           key: 'id'
         },
         allowNull: false
       },
-      weekdayId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: {
-            tableName: 'weekdays'
-            /* schema: 'nx_table_development' */
-          },
-          key: 'id'
-        },
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4
+      },
+      name: {
+        type: DataTypes.STRING,
         allowNull: false
       },
-      openingTime: {
-        type: DataTypes.TIME,
+      comments: {
+        type: DataTypes.STRING,
         allowNull: false
-      },
-      lastAdmisionTime: {
-        type: DataTypes.TIME,
-        allowNull: false
-      },
-      weekDay: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      isVacation: {
-        type: DataTypes.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -56,6 +42,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, DataTypes) => {
-    await queryInterface.dropTable('serviceSchedules');
+    await queryInterface.dropTable('services');
   }
 };

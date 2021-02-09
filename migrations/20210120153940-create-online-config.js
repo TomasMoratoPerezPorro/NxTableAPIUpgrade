@@ -1,31 +1,41 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable('services', {
+    await queryInterface.createTable('OnlineConfigs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      restaurantId: {
+      serviceId: {
         type: DataTypes.INTEGER,
         references: {
           model: {
-            tableName: 'restaurants'
+            tableName: 'services'
             /* schema: 'nx_table_development' */
           },
           key: 'id'
         },
         allowNull: false
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false
+      acceptsOnline: {
+        type: DataTypes.BOOLEAN
       },
-      comments: {
-        type: DataTypes.STRING,
-        allowNull: false
+      minDinners: {
+        type: DataTypes.INTEGER
+      },
+      maxDinners: {
+        type: DataTypes.INTEGER
+      },
+      minAnticipation: {
+        type: DataTypes.BIGINT
+      },
+      autoAssignment: {
+        type: DataTypes.BOOLEAN
+      },
+      maxReservations: {
+        type: DataTypes.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +48,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, DataTypes) => {
-    await queryInterface.dropTable('services');
+    await queryInterface.dropTable('OnlineConfigs');
   }
 };

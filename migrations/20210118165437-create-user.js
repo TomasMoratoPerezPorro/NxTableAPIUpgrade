@@ -8,6 +8,17 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
+      userroleId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: {
+            tableName: 'userroles'
+            /* schema: 'nx_table_development' */
+          },
+          key: 'id'
+        },
+        allowNull: false
+      },
       uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4
