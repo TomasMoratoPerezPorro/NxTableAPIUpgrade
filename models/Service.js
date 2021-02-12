@@ -10,16 +10,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate({
       Restaurant,
       Reservation,
-      Shift,
+      ServiceShift,
       ServiceSchedule,
-      OnlineConfig,
-      VacationPeriod
+      ServiceOnlineConfig,
+      ServiceVacationPeriod
     }) {
       this.belongsTo(Restaurant, { foreignKey: 'restaurantId' });
-      this.hasMany(OnlineConfig, { foreignKey: 'serviceId' });
-      this.hasMany(VacationPeriod, { foreignKey: 'serviceId' });
+      this.hasMany(ServiceOnlineConfig, { foreignKey: 'serviceId' });
+      this.hasMany(ServiceVacationPeriod, { foreignKey: 'serviceId' });
       this.hasMany(Reservation, { foreignKey: 'serviceId' });
-      this.hasMany(Shift, { foreignKey: 'serviceId' });
+      this.hasMany(ServiceShift, { foreignKey: 'serviceId' });
       this.hasMany(ServiceSchedule, { foreignKey: 'serviceId' });
     }
   }

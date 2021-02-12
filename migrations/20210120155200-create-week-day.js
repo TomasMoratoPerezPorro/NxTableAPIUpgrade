@@ -8,8 +8,16 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      serviceId: {
-        type: DataTypes.INTEGER
+      servicescheduleId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: {
+            tableName: 'serviceschedules'
+            /* schema: 'nx_table_development' */
+          },
+          key: 'id'
+        },
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

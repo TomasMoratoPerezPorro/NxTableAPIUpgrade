@@ -1,0 +1,224 @@
+{
+  "ENTITIES": [
+    {
+      "name": "UserRole",
+      "relations": [
+        {
+          "type": "hasMany(User)",
+          "foreignKey": "userroleId"
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "relations": [
+        {
+          "type": "belongsTo(UserRole)",
+          "foreignKey": "userroleId"
+        },
+        {
+          "type": "belongsToMany(Restaurant)",
+          "through": "UserRestaurant"
+        }
+      ]
+    },
+    {
+      "name": "City",
+      "relations": [
+        {
+          "type": "hasMany(Location)",
+          "foreignKey": "cityId"
+        }
+      ]
+    },
+    {
+      "name": "Location",
+      "relations": [
+        {
+          "type": "belongsTo(City)",
+          "foreignKey": "cityId"
+        },
+        {
+          "type": "belongsToMany(Restaurant)",
+          "through": "RestaurantLocation"
+        }
+      ]
+    },
+    {
+      "name": "Restaurant",
+      "relations": [
+        {
+          "type": "belongsToMany(User)",
+          "through": "UserRestaurant"
+        },
+        {
+          "type": "belongsToMany(Location)",
+          "through": "RestaurantLocation"
+        },
+        {
+          "type": "hasMany(Table)",
+          "foreignKey": "restaurantId"
+        },
+        {
+          "type": "hasMany(Client)",
+          "foreignKey": "restaurantId"
+        },
+        {
+          "type": "hasMany(Reservation)",
+          "foreignKey": "restaurantId"
+        },
+        {
+          "type": "hasMany(Service)",
+          "foreignKey": "restaurantId"
+        }
+      ]
+    },
+    {
+      "name": "RestaurantLocation"
+    },
+    {
+      "name": "UserRestaurant"
+    },
+    {
+      "name": "Client",
+      "relations": [
+        {
+          "type": "belongsTo(Restaurant)",
+          "foreignKey": "restaurantId"
+        },
+        {
+          "type": "hasMany(Reservation)",
+          "foreignKey": "clientId"
+        }
+      ]
+    },
+    {
+      "name": "Service",
+      "relations": [
+        {
+          "type": "belongsTo(Restaurant)",
+          "foreignKey": "restaurantId"
+        },
+        {
+          "type": "hasMany(ServiceOnlineConfig)",
+          "foreignKey": "serviceId"
+        },
+        {
+          "type": "hasMany(ServiceVacationPeriod)",
+          "foreignKey": "serviceId"
+        },
+        {
+          "type": "hasMany(Reservation)",
+          "foreignKey": "serviceId"
+        },
+        {
+          "type": "hasMany(ServiceShift)",
+          "foreignKey": "serviceId"
+        },
+        {
+          "type": "hasMany(ServiceSchedule)",
+          "foreignKey": "serviceId"
+        }
+      ]
+    },
+    {
+      "name": "ServiceSchedule",
+      "relations": [
+        {
+          "type": "belongsTo(Service)",
+          "foreignKey": "serviceId"
+        }
+      ]
+    },
+    {
+      "name": "ServiceShift",
+      "relations": [
+        {
+          "type": "belongsTo(Service)",
+          "foreignKey": "serviceId"
+        }
+      ]
+    },
+    {
+      "name": "ServiceOnlineCongig",
+      "relations": [
+        {
+          "type": "belongsTo(Service)",
+          "foreignKey": "serviceId"
+        }
+      ]
+    },
+    {
+      "name": "ServiceVacationPeriod",
+      "relations": [
+        {
+          "type": "belongsTo(Service)",
+          "foreignKey": "serviceId"
+        }
+      ]
+    },
+    {
+      "name": "ReservationState",
+      "relations": [
+        {
+          "type": "hasMany(Reservation)",
+          "foreignKey": "reservationStateId"
+        }
+      ]
+    },
+    {
+      "name": "Table",
+      "relations": [
+        {
+          "type": "belongsToMany(Reservation)",
+          "through": "TableReservation"
+        },
+        {
+          "type": "belongsTo(Restaurant)",
+          "foreignKey": "restaurantId"
+        }
+      ]
+    },
+    {
+      "name": "Reservation",
+      "relations": [
+        {
+          "type": "belongsToMany(Table)",
+          "through": "TableReservation"
+        },
+        {
+          "type": "belongsTo(Restaurant)",
+          "foreignKey": "restaurantId"
+        },
+        {
+          "type": "belongsTo(Client)",
+          "foreignKey": "clientId"
+        },
+        {
+          "type": "belongsTo(ReservationState)",
+          "foreignKey": "reservationStateId"
+        },
+        {
+          "type": "belongsTo(ResrvationOnline)",
+          "foreignKey": "resrvationOnlineId"
+        },
+        {
+          "type": "belongsTo(Service)",
+          "foreignKey": "serviceId"
+        }
+      ]
+    },
+    {
+      "name": "TableReservation"
+    },
+    {
+      "name": "ReservationOnline",
+      "relations": [
+        {
+          "type": "belongsTo(Reservation)",
+          "foreignKey": "reservationId"
+        }
+      ]
+    }
+  ]
+}

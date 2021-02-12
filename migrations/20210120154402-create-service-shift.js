@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable('VacationPeriods', {
+    await queryInterface.createTable('serviceShifts', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,11 +19,17 @@ module.exports = {
         },
         allowNull: false
       },
-      startingDate: {
-        type: DataTypes.DATE
+      shiftNum: {
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
-      endingDate: {
-        type: DataTypes.DATE
+      startingTime: {
+        type: DataTypes.TIME,
+        allowNull: false
+      },
+      durationTime: {
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +42,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, DataTypes) => {
-    await queryInterface.dropTable('VacationPeriods');
+    await queryInterface.dropTable('serviceShifts');
   }
 };

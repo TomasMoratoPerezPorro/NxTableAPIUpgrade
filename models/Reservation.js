@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ Table, Restaurant, Client, Service, Shift }) {
       // define association here
       this.belongsToMany(Table, { through: 'TableReservation' });
-      this.belongsTo(Restaurant, { through: 'restaurantId' });
-      this.belongsTo(Client, { through: 'clientId' });
-      this.belongsTo(Service, { through: 'serviceId' });
-      this.belongsTo(Shift, { through: 'shiftId' });
+      this.belongsTo(Restaurant, { foreignKey: 'restaurantId' });
+      this.belongsTo(Client, { foreignKey: 'clientId' });
+      this.belongsTo(Service, { foreignKey: 'serviceId' });
+      this.belongsTo(Shift, { foreignKey: 'shiftId' });
     }
   }
   Reservation.init(

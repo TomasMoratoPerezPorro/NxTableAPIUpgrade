@@ -5,10 +5,10 @@ const authRestaurant = require('../../middleware/authRestaurant');
 
 const { check, validationResult } = require('express-validator');
 
-const { Service, Shift } = require('../../models');
+const { Service, ServiceShift } = require('../../models');
 
-// @route           POST api/shift
-// @description     Create a new shift
+// @route           POST api/ServiceShift
+// @description     Create a new ServiceShift
 // @access          Private
 
 router.post(
@@ -28,16 +28,16 @@ router.post(
     }
     /// TODO
     const { serviceId, shiftNum, startingTime, durationTime } = req.body;
-    let shiftInstance;
+    let ServiceShiftInstance;
     try {
-      const shift = Shift.build({
+      const ServiceShift = ServiceShift.build({
         serviceId: serviceId,
         shiftNum: shiftNum,
         startingTime: startingTime,
         durationTime: durationTime
       });
-      shiftInstance = await Shift.save();
-      console.log('Shift was saved to the database!');
+      ServiceShiftInstance = await ServiceShift.save();
+      console.log('ServiceShift was saved to the database!');
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');

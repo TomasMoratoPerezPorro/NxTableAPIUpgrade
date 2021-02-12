@@ -1,18 +1,18 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Shift extends Model {
+  class ServiceShift extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate({ Reservation, Service }) {
-      this.hasMany(Reservation, { foreignKey: 'shiftId' });
+      this.hasMany(Reservation, { foreignKey: 'ServiceShiftId' });
       this.belongsTo(Service, { foreignKey: 'serviceId' });
     }
   }
-  Shift.init(
+  ServiceShift.init(
     {
       serviceId: {
         type: DataTypes.INTEGER,
@@ -33,9 +33,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      tableName: 'shifts',
-      modelName: 'Shift'
+      tableName: 'ServiceShifts',
+      modelName: 'ServiceShift'
     }
   );
-  return Shift;
+  return ServiceShift;
 };

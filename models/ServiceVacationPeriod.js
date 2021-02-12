@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class OnlineConfig extends Model {
+  class ServiceVacationPeriod extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,19 +11,16 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(Service, { foreignKey: 'serviceId' });
     }
   }
-  OnlineConfig.init(
+  ServiceVacationPeriod.init(
     {
-      acceptsOnline: DataTypes.BOOLEAN,
-      minDinners: DataTypes.INTEGER,
-      maxDinners: DataTypes.INTEGER,
-      minAnticipation: DataTypes.BIGINT,
-      autoAssignment: DataTypes.BOOLEAN,
-      maxReservations: DataTypes.INTEGER
+      serviceId: DataTypes.INTEGER,
+      startingDate: DataTypes.DATE,
+      endingDate: DataTypes.DATE
     },
     {
       sequelize,
-      modelName: 'OnlineConfig'
+      modelName: 'ServiceVacationPeriod'
     }
   );
-  return OnlineConfig;
+  return ServiceVacationPeriod;
 };

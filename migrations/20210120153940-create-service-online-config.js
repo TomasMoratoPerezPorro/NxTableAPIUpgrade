@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable('shifts', {
+    await queryInterface.createTable('ServiceOnlineConfigs', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,17 +19,23 @@ module.exports = {
         },
         allowNull: false
       },
-      shiftNum: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+      acceptsOnline: {
+        type: DataTypes.BOOLEAN
       },
-      startingTime: {
-        type: DataTypes.TIME,
-        allowNull: false
+      minDinners: {
+        type: DataTypes.INTEGER
       },
-      durationTime: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+      maxDinners: {
+        type: DataTypes.INTEGER
+      },
+      minAnticipation: {
+        type: DataTypes.BIGINT
+      },
+      autoAssignment: {
+        type: DataTypes.BOOLEAN
+      },
+      maxReservations: {
+        type: DataTypes.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -42,6 +48,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, DataTypes) => {
-    await queryInterface.dropTable('shifts');
+    await queryInterface.dropTable('ServiceOnlineConfigs');
   }
 };

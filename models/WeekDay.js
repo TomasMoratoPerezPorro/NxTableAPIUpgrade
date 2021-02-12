@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ ServiceSchedule }) {
-      this.hasOne(ServiceSchedule, { foreignKey: 'weekdayId' });
+      this.belongsTo(ServiceSchedule, { foreignKey: 'weekdayId' });
     }
   }
   WeekDay.init(
