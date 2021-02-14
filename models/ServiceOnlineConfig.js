@@ -13,15 +13,34 @@ module.exports = (sequelize, DataTypes) => {
   }
   ServiceOnlineConfig.init(
     {
-      acceptsOnline: DataTypes.BOOLEAN,
-      minDinners: DataTypes.INTEGER,
-      maxDinners: DataTypes.INTEGER,
-      minAnticipation: DataTypes.BIGINT,
-      autoAssignment: DataTypes.BOOLEAN,
-      maxReservations: DataTypes.INTEGER
+      acceptsOnline: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      },
+      minDinners: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      maxDinners: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      minAnticipation: {
+        type: DataTypes.BIGINT,
+        allowNull: false
+      },
+      autoAssignment: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      },
+      maxReservations: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      }
     },
     {
       sequelize,
+      tableName: 'serviceOnlineConfigs',
       modelName: 'ServiceOnlineConfig'
     }
   );

@@ -7,9 +7,8 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Service, WeekDay }) {
+    static associate({ Service }) {
       this.belongsTo(Service, { foreignKey: 'serviceId' });
-      this.hasMany(WeekDay, { foreignKey: 'servicescheduleId' });
     }
   }
   ServiceSchedule.init(
@@ -32,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      tableName: 'serviceschedules',
+      tableName: 'serviceSchedules',
       modelName: 'ServiceSchedule'
     }
   );

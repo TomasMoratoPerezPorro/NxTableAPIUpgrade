@@ -19,17 +19,6 @@ module.exports = {
         },
         allowNull: false
       },
-      weekdayId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: {
-            tableName: 'weekdays'
-            /* schema: 'nx_table_development' */
-          },
-          key: 'id'
-        },
-        allowNull: false
-      },
       openingTime: {
         type: DataTypes.TIME,
         allowNull: false

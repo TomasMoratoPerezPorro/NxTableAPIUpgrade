@@ -13,12 +13,22 @@ module.exports = (sequelize, DataTypes) => {
   }
   ServiceVacationPeriod.init(
     {
-      serviceId: DataTypes.INTEGER,
-      startingDate: DataTypes.DATE,
-      endingDate: DataTypes.DATE
+      serviceId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      startingDate: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
+      endingDate: {
+        type: DataTypes.DATE,
+        allowNull: false
+      }
     },
     {
       sequelize,
+      tableName: 'ServiceVacationPeriods',
       modelName: 'ServiceVacationPeriod'
     }
   );

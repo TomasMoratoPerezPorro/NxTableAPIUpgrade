@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ReservationOnline extends Model {
     /**
@@ -9,15 +7,22 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ Reservation }) {
+      this.belongsTo(Reservation, { foreignKey: 'reservationId' });
     }
-  };
-  ReservationOnline.init({
-    isAssigned: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'ReservationOnline',
-  });
+  }
+  ReservationOnline.init(
+    {
+      isAssigned: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      }
+    },
+    {
+      sequelize,
+      tableName: 'reservationOnlines',
+      modelName: 'ReservationOnline'
+    }
+  );
   return ReservationOnline;
 };

@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ReservationState extends Model {
     /**
@@ -9,16 +7,26 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ Reservation }) {
+      this.hasMany(Reservation, { foreignKey: 'reservationStateId' });
     }
-  };
-  ReservationState.init({
-    stateName: DataTypes.STRING,
-    stateColour: DataTypes.CHAR
-  }, {
-    sequelize,
-    modelName: 'ReservationState',
-  });
+  }
+  ReservationState.init(
+    {
+      stateName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      stateColour: {
+        type: DataTypes.CHAR,
+        allowNull: false
+      }
+    },
+    {
+      sequelize,
+      tableName: 'reservationStates',
+      modelName: 'ReservationState'
+    }
+  );
   return ReservationState;
 };

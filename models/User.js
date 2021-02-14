@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ Restaurant, UserRole }) {
       this.belongsToMany(Restaurant, { through: 'UserRestaurant' });
-      this.belongsTo(UserRole, { foreignKey: 'userroleId' });
+      this.belongsTo(UserRole, { foreignKey: 'userRoleId' });
     }
 
     toJSON() {

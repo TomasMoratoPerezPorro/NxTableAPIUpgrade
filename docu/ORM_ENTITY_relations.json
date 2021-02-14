@@ -5,7 +5,7 @@
       "relations": [
         {
           "type": "hasMany(User)",
-          "foreignKey": "userroleId"
+          "foreignKey": "userRoleId"
         }
       ]
     },
@@ -140,7 +140,7 @@
       ]
     },
     {
-      "name": "ServiceOnlineCongig",
+      "name": "ServiceOnlineConfig",
       "relations": [
         {
           "type": "belongsTo(Service)",
