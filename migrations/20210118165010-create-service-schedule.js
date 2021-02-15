@@ -13,7 +13,6 @@ module.exports = {
         references: {
           model: {
             tableName: 'services'
-            /* schema: 'nx_table_development' */
           },
           key: 'id'
         },

@@ -17,7 +17,6 @@ module.exports = {
         references: {
           model: {
             tableName: 'clients'
-            /* schema: 'nx_table_development' */
           },
           key: 'id'
         },
@@ -28,18 +27,6 @@ module.exports = {
         references: {
           model: {
             tableName: 'services'
-            /* schema: 'nx_table_development' */
-          },
-          key: 'id'
-        },
-        allowNull: false
-      },
-      shiftId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: {
-            tableName: 'shifts'
-            /* schema: 'nx_table_development' */
           },
           key: 'id'
         },
@@ -50,7 +37,16 @@ module.exports = {
         references: {
           model: {
             tableName: 'restaurants'
-            /* schema: 'nx_table_development' */
+          },
+          key: 'id'
+        },
+        allowNull: false
+      },
+      reservationStateId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: {
+            tableName: 'reservationStates'
           },
           key: 'id'
         },

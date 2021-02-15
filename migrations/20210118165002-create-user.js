@@ -8,11 +8,11 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      userroleId: {
+      userRoleId: {
         type: DataTypes.INTEGER,
         references: {
           model: {
-            tableName: 'userroles'
+            tableName: 'userRoles'
             /* schema: 'nx_table_development' */
           },
           key: 'id'

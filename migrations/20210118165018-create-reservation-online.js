@@ -1,27 +1,38 @@
 'use strict';
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('ReservationOnlines', {
+  up: async (queryInterface, DataTypes) => {
+    await queryInterface.createTable('reservationOnlines', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
+      },
+      reservationId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+
+        references: {
+          model: {
+            tableName: 'reservations'
+          },
+          key: 'id'
+        }
       },
       isAssigned: {
-        type: Sequelize.BOOLEAN
+        type: DataTypes.BOOLEAN
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('ReservationOnlines');
+  down: async (queryInterface, DataTypes) => {
+    await queryInterface.dropTable('reservationOnlines');
   }
 };

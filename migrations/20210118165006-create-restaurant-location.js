@@ -1,30 +1,41 @@
 'use strict';
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('RestaurantLocations', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
+  up: async (queryInterface, DataTypes) => {
+    await queryInterface.createTable('restaurantLocations', {
       restaurantId: {
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: {
+            tableName: 'restaurants'
+          },
+          key: 'id'
+        }
       },
       locationId: {
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: {
+            tableName: 'locations'
+          },
+          key: 'id'
+        }
       },
+
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('RestaurantLocations');
+  down: async (queryInterface, DataTypes) => {
+    await queryInterface.dropTable('restaurantLocations');
   }
 };

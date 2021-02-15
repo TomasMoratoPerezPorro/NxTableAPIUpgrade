@@ -14,7 +14,7 @@
       "relations": [
         {
           "type": "belongsTo(UserRole)",
-          "foreignKey": "userroleId"
+          "foreignKey": "userRoleId"
         },
         {
           "type": "belongsToMany(Restaurant)",
@@ -199,7 +199,7 @@
           "foreignKey": "reservationStateId"
         },
         {
-          "type": "belongsTo(ResrvationOnline)",
+          "type": "hasMany(ResrvationOnline)",
           "foreignKey": "resrvationOnlineId"
         },
         {

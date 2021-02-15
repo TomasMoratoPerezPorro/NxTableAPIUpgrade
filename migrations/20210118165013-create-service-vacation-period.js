@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable('ServiceVacationPeriods', {
+    await queryInterface.createTable('serviceVacationPeriods', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,7 +13,6 @@ module.exports = {
         references: {
           model: {
             tableName: 'services'
-            /* schema: 'nx_table_development' */
           },
           key: 'id'
         },
@@ -36,6 +35,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, DataTypes) => {
-    await queryInterface.dropTable('ServiceVacationPeriods');
+    await queryInterface.dropTable('serviceVacationPeriods');
   }
 };

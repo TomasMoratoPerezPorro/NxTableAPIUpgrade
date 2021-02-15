@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(Client, { foreignKey: 'clientId' });
       this.belongsTo(Service, { foreignKey: 'serviceId' });
       this.belongsTo(ReservationState, { foreignKey: 'reservationStateId' });
-      this.belongsTo(ReservationOnline, { foreignKey: 'reservationOnlineId' });
+      this.hasMany(ReservationOnline, { foreignKey: 'reservationOnlineId' });
     }
   }
   Reservation.init(

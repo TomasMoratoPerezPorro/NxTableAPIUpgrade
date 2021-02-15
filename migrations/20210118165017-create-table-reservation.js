@@ -9,7 +9,6 @@ module.exports = {
         references: {
           model: {
             tableName: 'tables'
-            /* schema: 'nx_table_development' */
           },
           key: 'id'
         }
@@ -21,7 +20,6 @@ module.exports = {
         references: {
           model: {
             tableName: 'reservations'
-            /* schema: 'nx_table_development' */
           },
           key: 'id'
         }

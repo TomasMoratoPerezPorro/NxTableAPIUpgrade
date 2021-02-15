@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
   City.init(
     {
       countryCode: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(3),
         allowNull: false
       },
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false
       }
     },
