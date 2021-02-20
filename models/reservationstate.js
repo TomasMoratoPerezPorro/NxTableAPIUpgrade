@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   ReservationState.init(
     {
+      reservationStateId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
       stateName: {
         type: DataTypes.STRING,
         allowNull: false

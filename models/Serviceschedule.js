@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   ServiceSchedule.init(
     {
+      serviceScheduleId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
       openingTime: {
         type: DataTypes.TIME,
         allowNull: false

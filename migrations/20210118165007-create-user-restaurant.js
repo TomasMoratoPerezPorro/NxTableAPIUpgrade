@@ -3,7 +3,7 @@ module.exports = {
   up: async (queryInterface, DataTypes) => {
     await queryInterface.createTable('userRestaurants', {
       userId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
         references: {
@@ -11,11 +11,11 @@ module.exports = {
             tableName: 'users'
             /* schema: 'nx_table_development' */
           },
-          key: 'id'
+          key: 'userId'
         }
       },
       restaurantId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
         references: {
@@ -23,7 +23,7 @@ module.exports = {
             tableName: 'restaurants'
             /* schema: 'nx_table_development' */
           },
-          key: 'id'
+          key: 'restaurantId'
         }
       },
       createdAt: {

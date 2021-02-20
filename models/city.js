@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   City.init(
     {
+      cityId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
       countryCode: {
         type: DataTypes.STRING(3),
         allowNull: false

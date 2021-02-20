@@ -14,17 +14,17 @@ module.exports = (sequelize, DataTypes) => {
   TableReservation.init(
     {
       tableId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: 'Table',
-          key: 'id'
+          key: 'tableId'
         }
       },
       reservationId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: 'Reservation',
-          key: 'id'
+          key: 'reservationId'
         }
       }
     },

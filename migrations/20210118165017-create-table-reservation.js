@@ -3,25 +3,25 @@ module.exports = {
   up: async (queryInterface, DataTypes) => {
     await queryInterface.createTable('tableReservations', {
       tableId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
         references: {
           model: {
             tableName: 'tables'
           },
-          key: 'id'
+          key: 'tableId'
         }
       },
       reservationId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
         references: {
           model: {
             tableName: 'reservations'
           },
-          key: 'id'
+          key: 'reservationId'
         }
       },
       createdAt: {

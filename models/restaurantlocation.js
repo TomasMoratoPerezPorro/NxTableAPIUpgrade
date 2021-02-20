@@ -14,17 +14,17 @@ module.exports = (sequelize, DataTypes) => {
   RestaurantLocation.init(
     {
       restaurantId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: 'Restaurant', // 'Users' would also work
-          key: 'id'
+          key: 'restaurantId'
         }
       },
       locationId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: 'Location', // 'Users' would also work
-          key: 'id'
+          key: 'locationId'
         }
       }
     },

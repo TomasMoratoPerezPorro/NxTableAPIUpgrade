@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   ReservationOnline.init(
     {
+      reservationOnlineId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
       isAssigned: {
         type: DataTypes.BOOLEAN,
         allowNull: false

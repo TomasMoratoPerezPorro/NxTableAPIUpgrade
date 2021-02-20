@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
   UserRestaurant.init(
     {
       userId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: 'User', // 'Users' would also work
           key: 'id'
         }
       },
       restaurantId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: 'Restaurant', // 'Restaurants' would also work
           key: 'id'

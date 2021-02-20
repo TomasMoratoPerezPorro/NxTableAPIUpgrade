@@ -2,20 +2,20 @@
 module.exports = {
   up: async (queryInterface, DataTypes) => {
     await queryInterface.createTable('locations', {
-      id: {
+      locationId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER
+        primaryKey: true
       },
       cityId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
           model: {
             tableName: 'cities'
           },
-          key: 'id'
+          key: 'cityId'
         }
       },
       streetType: {

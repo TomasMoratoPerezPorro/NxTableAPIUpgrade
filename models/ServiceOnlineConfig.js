@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   ServiceOnlineConfig.init(
     {
+      serviceOnlineId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
       acceptsOnline: {
         type: DataTypes.BOOLEAN,
         allowNull: false

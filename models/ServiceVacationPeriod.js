@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   ServiceVacationPeriod.init(
     {
+      serviceVacationPeriodId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
       serviceId: {
         type: DataTypes.INTEGER,
         allowNull: false

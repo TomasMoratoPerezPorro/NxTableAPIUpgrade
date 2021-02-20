@@ -23,17 +23,15 @@ module.exports = (sequelize, DataTypes) => {
   }
   Restaurant.init(
     {
-      uuid: {
+      restaurantId: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      location: {
-        type: DataTypes.STRING,
-        allowNull: true
       },
       description: {
         type: DataTypes.STRING,

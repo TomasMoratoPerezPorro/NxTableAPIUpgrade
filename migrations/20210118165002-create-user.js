@@ -2,20 +2,20 @@
 module.exports = {
   up: async (queryInterface, DataTypes) => {
     await queryInterface.createTable('users', {
-      id: {
+      userId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER
+        primaryKey: true
       },
       userRoleId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: {
             tableName: 'userRoles'
             /* schema: 'nx_table_development' */
           },
-          key: 'id'
+          key: 'userRoleId'
         },
         allowNull: false
       },

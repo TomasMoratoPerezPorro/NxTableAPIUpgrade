@@ -2,19 +2,19 @@
 module.exports = {
   up: async (queryInterface, DataTypes) => {
     await queryInterface.createTable('serviceShifts', {
-      id: {
+      serviceShiftId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER
+        primaryKey: true
       },
       serviceId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: {
             tableName: 'services'
           },
-          key: 'id'
+          key: 'serviceId'
         },
         allowNull: false
       },

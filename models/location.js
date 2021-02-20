@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Location.init(
     {
+      locationId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
       streetType: {
         type: DataTypes.STRING,
         allowNull: false

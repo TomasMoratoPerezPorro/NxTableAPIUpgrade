@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Table.init(
     {
+      tableId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
       tableNumber: {
         type: DataTypes.INTEGER,
         allowNull: false

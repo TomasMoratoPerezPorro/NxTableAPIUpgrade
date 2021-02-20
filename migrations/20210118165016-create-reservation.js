@@ -2,53 +2,49 @@
 module.exports = {
   up: async (queryInterface, DataTypes) => {
     await queryInterface.createTable('reservations', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER
-      },
-      uuid: {
+      reservationId: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
       },
       clientId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: {
             tableName: 'clients'
           },
-          key: 'id'
+          key: 'clientId'
         },
         allowNull: false
       },
       serviceId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: {
             tableName: 'services'
           },
-          key: 'id'
+          key: 'serviceId'
         },
         allowNull: false
       },
       restaurantId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: {
             tableName: 'restaurants'
           },
-          key: 'id'
+          key: 'restaurantId'
         },
         allowNull: false
       },
       reservationStateId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: {
             tableName: 'reservationStates'
           },
-          key: 'id'
+          key: 'reservationStateId'
         },
         allowNull: false
       },

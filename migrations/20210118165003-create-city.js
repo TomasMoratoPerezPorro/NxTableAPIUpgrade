@@ -2,11 +2,11 @@
 module.exports = {
   up: async (queryInterface, DataTypes) => {
     await queryInterface.createTable('cities', {
-      id: {
+      cityId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER
+        primaryKey: true
       },
       countryCode: {
         type: DataTypes.STRING(3)
