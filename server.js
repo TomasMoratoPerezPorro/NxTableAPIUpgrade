@@ -1,6 +1,7 @@
-const { sequelize } = require('./models');
+const { sequelize } = require('./database_models/models');
 const express = require('express');
 const app = express();
+const routes = require('./routes');
 
 //Init Middleware
 app.use(express.json({ extended: false }));
@@ -9,10 +10,12 @@ app.use(express.json({ extended: false }));
 app.get('/', (req, res) => res.send('API Running'));
 
 // Define Routes
-app.use('/api/users', require('./routes/api/users'));
+app.use('/api', routes);
+
+/* app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/restaurant', require('./routes/api/restaurant'));
-app.use('/api/service', require('./routes/api/service'));
+app.use('/api/service', require('./routes/api/service')); */
 
 //Look for a enviroment variable or run locally by default
 const PORT = process.env.PORT || 5000;

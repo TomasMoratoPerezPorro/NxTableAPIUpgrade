@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         primaryKey: true
       },
-      identifier: {
+      email: {
         type: DataTypes.STRING,
         allowNull: false
       },
@@ -32,11 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      name: {
+      firstName: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      role: {
+      lastName: {
         type: DataTypes.STRING,
         allowNull: false
       }

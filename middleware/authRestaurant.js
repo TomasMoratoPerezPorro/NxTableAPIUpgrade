@@ -1,4 +1,4 @@
-const { Restaurant, User } = require('../models');
+const { Restaurant, User } = require('../database_models/models');
 
 module.exports = async function (req, res, next) {
   const { restaurantUuid } = req.body;

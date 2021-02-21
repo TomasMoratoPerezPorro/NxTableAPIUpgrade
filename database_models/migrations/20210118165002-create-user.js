@@ -19,11 +19,7 @@ module.exports = {
         },
         allowNull: false
       },
-      uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4
-      },
-      identifier: {
+      email: {
         type: DataTypes.STRING,
         allowNull: false
       },
@@ -31,11 +27,11 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false
       },
-      name: {
+      firstName: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      role: {
+      lastName: {
         type: DataTypes.STRING,
         allowNull: false
       },
