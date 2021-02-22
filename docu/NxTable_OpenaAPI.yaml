@@ -1,0 +1,790 @@
+openapi: 3.0.0
+info:
+  description:
+    'This is a sample server for the Nxtable api.  You can find out more about
+    this project in the [GitHub page](https://github.com/TomasMoratoPerezPorro/NxTableAPIUpgrade) .
+    For this sample, you can use the api key
+    `special-key` to test the authorization filters.'
+  version: 1.0.1
+  title: NxTable API
+  contact:
+    email: tomasmpp@gmail.com
+tags:
+  - name: user
+    description: Access to the user information
+  - name: auth
+    description: Authorization for protected information
+  - name: restaurant
+    description: Access to restaurant information
+  - name: reservation
+    description: Operations about restaurant reservations
+  - name: table
+    description: Operations about restaurant tables
+  - name: client
+    description: Operations about restaurant clients
+  - name: service
+    description: Operations about restaurant services
+
+paths:
+  /auth:
+    post:
+      tags:
+        - auth
+      summary: Login an existing user and get an authorization Token
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Send authorization token for the given user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: JWT.
+        '401':
+          description: Authorization information is missing or invalid.
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - auth
+      summary: Return User Info
+      description: 'Returns User Information given a valid token'
+      responses:
+        '200':
+          description: Send user info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuidv4
+                  roleId:
+                    type: string
+                    format: uuidv4
+                  identifier:
+                    type: string
+                    format: email
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+        '401':
+          description: Authorization information is missing or invalid.
+  /user:
+    post:
+      tags:
+        - user
+      summary: Register a new user and return an authorization token
+      description: 'Registers a new user without role'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                identifier:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Send authorization token to the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: JWT.
+        '400':
+          description: 'Bad request'
+
+  /restaurant:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - restaurant
+      summary: Create a new restaurant with location details
+      description: 'Create a new restaurant and set the relation betwen user and restaurant'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                streetType:
+                  type: string
+                streetName:
+                  type: string
+                number:
+                  type: string
+      responses:
+        '200':
+          description: Restaurant saved to the database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Restaurant'
+        '400':
+          description: 'Bad request'
+
+  /restaurant/{restaurantId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - restaurant
+      summary: Return restaurant Info
+      description: 'Returns restaurant information if the user is authorized'
+      parameters:
+        - in: path
+          name: restaurantId
+          schema:
+            type: string
+            format: UUIDv4
+          required: true
+          description: UUID of the restaurant to get
+      responses:
+        '200':
+          description: Send restaurant public information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  streetType:
+                    type: string
+                  streetName:
+                    type: string
+                  number:
+                    type: string
+        '401':
+          description: Authorization information is missing or invalid.
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - restaurant
+      summary: Edit restaurant information
+      description: 'Edit restaurant information providing the new attributes'
+      parameters:
+        - in: path
+          name: restaurantId
+          schema:
+            type: string
+            format: UUIDv4
+          required: true
+          description: UUID of the restaurant to edit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                streetType:
+                  type: string
+                streetName:
+                  type: string
+                number:
+                  type: string
+      responses:
+        '200':
+          description: Restaurantsvaed to the database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Restaurant'
+        '400':
+          description: 'Bad request'
+  /tables:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - table
+      summary: Return an array with all tables in the users restaurant
+      description: 'Returns restaurant tables array'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                restaurantId:
+                  type: string
+                  format: UUIDv4
+      responses:
+        '200':
+          description: Array with all tables in the restaurant
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Table'
+        '400':
+          description: 'Bad request'
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - table
+      summary: Setup all tables in the restaurant and create database relation
+      description: 'Returns restaurant tables array'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                restaurantId:
+                  type: string
+                restaurantTables:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Table'
+      responses:
+        '200':
+          description: All tables saved in the database
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  restaurantTables:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Table'
+        '400':
+          description: 'Bad request'
+  /table/{tableId}:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - table
+      summary: Change information ( table max Capacity) in a given table
+      description: 'Updates a table'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Table'
+
+      responses:
+        '200':
+          description: Returns updated table information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        '400':
+          description: 'Bad request'
+  /service:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - service
+      summary: Setup a new service for the restaurant
+      description: 'Saves a new service to the database with the correspondent Schedule'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '200':
+          description: All tables saved in the database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceWithId'
+
+        '400':
+          description: 'Bad request'
+  /service/{serviceId}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - service
+      summary: Return service information given a valid service Id
+      description: 'Returns complete service information including weekShedule'
+      parameters:
+        - in: path
+          name: serviceId
+          schema:
+            type: string
+            format: UUIDv4
+          required: true
+          description: UUID of the service to get
+      responses:
+        '200':
+          description: Service information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceWithId'
+
+        '400':
+          description: 'Bad request'
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - service
+      summary: Updates service information given a valid service Id
+      description: 'Updates service information'
+      parameters:
+        - in: path
+          name: serviceId
+          schema:
+            type: string
+            format: UUIDv4
+          required: true
+          description: UUID of the service to get
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceWithId'
+      responses:
+        '200':
+          description: Service information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceWithId'
+
+        '400':
+          description: 'Bad request'
+
+  /reservations:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - reservation
+      summary: Get reservations filtered by date or by date and service
+      description: 'Saves a new reservation to the database and the table assignation'
+      parameters:
+        - in: query
+          name: date
+          required: true
+          schema:
+            type: string
+            format: date
+          description: The date filter to get reservations
+        - in: query
+          name: service
+          schema:
+            type: string
+            format: date
+          description: The service id filter to get reservations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                restaurantId:
+                  type: string
+                  format: UUIDv4
+
+      responses:
+        '200':
+          description: Reservation saved in the database
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reservationId:
+                    type: string
+                    format: uuidv4
+
+        '400':
+          description: 'Bad request'
+  /reservation:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - reservation
+      summary: Save new reservation
+      description: 'Saves a new reservation to the database and the table assignation'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                restaurantId:
+                  type: string
+                  format: UUIDv4
+                numberOfDinners:
+                  type: integer
+                serviceId:
+                  type: string
+                  format: uuidv4
+                serviceShiftId:
+                  type: string
+                  format: uuidv4
+                date:
+                  type: string
+                  format: date
+                startingTime:
+                  type: string
+                  format: time
+                tables:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      tableId:
+                        type: string
+                        format: uuidv4
+                contactInfo:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    phone:
+                      type: string
+                comments:
+                  type: string
+
+      responses:
+        '200':
+          description: Reservation saved in the database
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reservationId:
+                    type: string
+                    format: uuidv4
+
+        '400':
+          description: 'Bad request'
+
+  /reservation/{reservationId}:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - reservation
+      summary: Update reservation
+      description: 'Updates an existing reservation to the database and the table assignation'
+      parameters:
+        - in: path
+          name: reservationId
+          schema:
+            type: string
+            format: UUIDv4
+          required: true
+          description: UUID of the reservation to edit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                numberOfDinners:
+                  type: integer
+                serviceId:
+                  type: string
+                  format: uuidv4
+                serviceShiftId:
+                  type: string
+                  format: uuidv4
+                date:
+                  type: string
+                  format: date
+                startingTime:
+                  type: string
+                  format: time
+                tables:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      tableId:
+                        type: string
+                        format: uuidv4
+                comments:
+                  type: string
+      responses:
+        '200':
+          description: Reservation saved in the database
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reservationId:
+                    type: string
+                    format: uuidv4
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - reservation
+      summary: Cancel a reservation
+      description: 'Deletes an existing reservation of the database and its table assignation'
+      parameters:
+        - in: path
+          name: reservationId
+          schema:
+            type: string
+            format: UUIDv4
+          required: true
+          description: UUID of the reservation to delete
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                restaurantId:
+                  type: string
+                  format: uuidv4
+      responses:
+        '200':
+          description: Reservation deleted from the database
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reservationId:
+                    type: string
+                    format: uuidv4
+
+        '400':
+          description: 'Invalid Id supplied'
+        '404':
+          description: 'Reservation not found'
+
+servers:
+  - url: http://localhost:5000
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  requestBodies:
+    UserArray:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+      description: List of user object
+      required: true
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuidv4
+        roleId:
+          type: string
+          format: uuidv4
+        identifier:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+    Restaurant:
+      type: object
+      properties:
+        id:
+          type: string
+          format: UUIDv4
+        name:
+          type: string
+        description:
+          type: string
+    Table:
+      type: object
+      properties:
+        id:
+          type: string
+          format: UUIDv4
+        tableNumber:
+          type: string
+        maxCapacity:
+          type: integer
+    Client:
+      type: object
+      properties:
+        id:
+          type: string
+          format: UUIDv4
+        restaurantId:
+          type: string
+          format: UUIDv4
+        name:
+          type: string
+        mobile:
+          type: string
+          example: 650598080
+        email:
+          type: string
+    Service:
+      type: object
+      properties:
+        restaurantId:
+          type: string
+          format: UUIDv4
+        name:
+          type: string
+          format: UUIDv4
+        comments:
+          type: string
+        mealDurationTime:
+          type: string
+          format: time
+        weekSchedule:
+          $ref: '#/components/schemas/WeekSchedule'
+    ServiceWithId:
+      type: object
+      properties:
+        restaurantId:
+          type: string
+          format: UUIDv4
+        serviceId:
+          type: string
+          format: UUIDv4
+        name:
+          type: string
+          format: UUIDv4
+        comments:
+          type: string
+        mealDurationTime:
+          type: string
+          format: time
+        weekSchedule:
+          $ref: '#/components/schemas/WeekScheduleWithId'
+    WeekSchedule:
+      type: array
+      items:
+        type: object
+        properties:
+          openingTime:
+            type: string
+            format: time
+          lastAdmisionTime:
+            type: string
+            format: time
+          weekDay:
+            type: integer
+    WeekScheduleWithId:
+      type: array
+      items:
+        type: object
+        properties:
+          ServiceScheduleId:
+            type: string
+            format: UUIDv4
+          openingTime:
+            type: string
+            format: time
+          lastAdmisionTime:
+            type: string
+            format: time
+          weekDay:
+            type: integer
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: UUIDv4
+        restaurantId:
+          type: string
+          format: UUIDv4
+        clientId:
+          type: string
+          format: UUIDv4
+        serviceId:
+          type: string
+          format: UUIDv4
+        reservationStateId:
+          type: string
+          format: UUIDv4
+        date:
+          type: string
+          format: date
+        startingTime:
+          type: string
+          format: time
+        coments:
+          type: string
+        numberOfDinners:
+          type: integer
