@@ -2,11 +2,11 @@ const { sequelize, User } = require('../database_models/models');
 
 const userFindOneByEmailDb = async (email) => {
   try {
-    let user = await User.findOne({
+    let userInstance = await User.findOne({
       where: { email: email }
     });
 
-    return user;
+    return userInstance.toJSON();
   } catch (err) {
     throw new Error(err.message);
   }

@@ -17,7 +17,6 @@ const createNewUserDb = async (
       lastName: lastName
     });
 
-    console.log('USER INSIDE DB:' + userInstance.userId);
     return userInstance.toJSON();
   } catch (err) {
     throw new Error(err.message);

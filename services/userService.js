@@ -1,8 +1,9 @@
 const { createNewUserDb } = require('../database_access');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+
 const config = require('config');
 const { userFindOneByEmailDb } = require('../database_access');
+const signToken = require('../utils/signToken');
 
 const userExists = async (email) => {
   try {
@@ -57,20 +58,6 @@ const createToken = async (userId) => {
   } catch (err) {
     throw new Error(err.message);
   }
-};
-
-const signToken = async (payload, privatekey) => {
-  const promise = new Promise((resolve, reject) => {
-    jwt.sign(payload, privatekey, { expiresIn: 3600 }, (err, token) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(token);
-      }
-    });
-  });
-
-  return promise;
 };
 
 module.exports = {
