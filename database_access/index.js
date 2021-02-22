@@ -1,5 +1,7 @@
-const { userDb } = require('./userDb');
+const { createNewUserDb } = require('./createNewUserDb');
+const { userFindOneByEmailDb } = require('./userFindOneByEmailDb');
 
 module.exports = {
-  userDb
+  createNewUserDb,
+  userFindOneByEmailDb
 };

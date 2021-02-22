@@ -1,6 +1,6 @@
 const { userService } = require('../services');
 
-const { userExists, encryptPassword, createUser, signToken } = userService;
+const { userExists, encryptPassword, createUser, createToken } = userService;
 
 // @route           POST api/users
 // @description     Register a user
@@ -12,20 +12,16 @@ const postUser = async (req, res, next) => {
   try {
     isAlreadySaved = await userExists(email);
 
-    if (isAlreadySaved) {
-      return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
-    }
-
     const encryptedPassword = await encryptPassword(password);
 
-    const userId = await createUser(
+    const user = await createUser(
       email,
       encryptedPassword,
       firstName,
       lastName
     );
 
-    const signedToken = await signToken(userId);
+    const signedToken = await createToken(user.userId);
 
     res.json({ signedToken });
   } catch (err) {

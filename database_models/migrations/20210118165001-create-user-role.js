@@ -9,15 +9,7 @@ module.exports = {
         primaryKey: true
       },
       roleName: {
-        type: DataTypes.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE
+        type: DataTypes.STRING(20)
       }
     });
   },

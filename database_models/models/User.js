@@ -11,10 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(Restaurant, { through: 'UserRestaurant' });
       this.belongsTo(UserRole, { foreignKey: 'userRoleId' });
     }
-
-    toJSON() {
-      return { ...this.get(), id: undefined };
-    }
   }
   User.init(
     {

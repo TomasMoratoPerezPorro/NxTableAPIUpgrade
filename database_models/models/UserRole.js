@@ -20,11 +20,12 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true
       },
       roleName: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(20),
         allowNull: false
       }
     },
     {
+      timestamps: false,
       sequelize,
       tableName: 'userRoles',
       modelName: 'UserRole'

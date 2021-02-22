@@ -1,16 +1,17 @@
-const { userDb } = require('../database_access');
+const { createNewUserDb } = require('../database_access');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const { userFindOneByEmailDb } = require('../database_access');
 
 const userExists = async (email) => {
   try {
-    let user = await userDb.findUserByEmailDb(email);
+    let user = await userFindOneByEmailDb(email);
 
     if (user == null) {
       return false;
     } else {
-      return true;
+      throw new Error("{ errors: [{ msg: 'User already exists' }] }");
     }
   } catch (err) {
     throw new Error(err.message);
@@ -30,37 +31,51 @@ const encryptPassword = async (password) => {
 
 const createUser = async (email, encryptedPassword, firstName, lastName) => {
   try {
-    let user = await saveUserDb(email, encryptedPassword, firstName, lastName);
-    return user.id;
+    let user = await createNewUserDb(
+      email,
+      encryptedPassword,
+      firstName,
+      lastName
+    );
+
+    return user;
   } catch (err) {
     throw new Error(err.message);
   }
 };
 
-const signToken = async (userId) => {
+const createToken = async (userId) => {
   const payload = {
     user: {
       id: userId
     }
   };
+
   try {
-    jwt.sign(
-      payload,
-      config.get('jwtSecret'),
-      { expiresIn: 36000 },
-      (err, token) => {
-        if (err) throw err;
-        return json({ token });
-      }
-    );
+    const token = await signToken(payload, config.get('jwtSecret'));
+    return token;
   } catch (err) {
     throw new Error(err.message);
   }
+};
+
+const signToken = async (payload, privatekey) => {
+  const promise = new Promise((resolve, reject) => {
+    jwt.sign(payload, privatekey, { expiresIn: 3600 }, (err, token) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(token);
+      }
+    });
+  });
+
+  return promise;
 };
 
 module.exports = {
   userExists,
   encryptPassword,
   createUser,
-  signToken
+  createToken
 };
