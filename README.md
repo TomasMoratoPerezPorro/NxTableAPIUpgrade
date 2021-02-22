@@ -6,3 +6,7 @@ Complete API service for restaurant bookings management.
 
 Database relational model link: https://drive.google.com/file/d/1dbSo14QLJEVoJmUqFTAjDYB0meP4QP2N/view?usp=sharing
 
+This Application implements the following layer architecture
+
+![Test Image 4](https://github.com/TomasMoratoPerezPorro/NxTableAPIUpgrade/blob/main/docu/API_ARCHITECTURE.png)
+
