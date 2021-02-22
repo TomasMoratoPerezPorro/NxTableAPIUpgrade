@@ -21,15 +21,19 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true
       },
       streetType: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(20),
         allowNull: false
       },
       streetName: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false
       },
       streetNumber: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(5),
+        allowNull: false
+      },
+      zipCode: {
+        type: DataTypes.STRING(10),
         allowNull: false
       }
     },

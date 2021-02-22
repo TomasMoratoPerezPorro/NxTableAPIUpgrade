@@ -64,10 +64,6 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      comments: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE

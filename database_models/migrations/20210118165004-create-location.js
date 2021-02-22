@@ -19,13 +19,16 @@ module.exports = {
         }
       },
       streetType: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(20)
       },
       streetName: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(30)
       },
       streetNumber: {
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING(5)
+      },
+      zipCode: {
+        type: DataTypes.STRING(10)
       },
       createdAt: {
         allowNull: false,

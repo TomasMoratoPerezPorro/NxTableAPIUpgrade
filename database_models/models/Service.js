@@ -42,6 +42,10 @@ module.exports = (sequelize, DataTypes) => {
       comments: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      mealDurationMins: {
+        type: DataTypes.INTEGER,
+        allowNull: false
       }
     },
     {
