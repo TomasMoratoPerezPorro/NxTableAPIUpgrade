@@ -1,4 +1,4 @@
-const { userFindOneByEmailDb } = require('../database_access');
+const { userFindOneByEmailDb } = require('../database_access/userDb');
 const signToken = require('../utils/signToken');
 const bcrypt = require('bcryptjs');
 const config = require('config');

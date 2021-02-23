@@ -11,7 +11,7 @@ const registerNewRestaurant = async (req, res, next) => {
     // Create Restaurant
     const restaurant = await createRestaurant(name, description, streetType, streetName, streetNumber);
     // Create relation between restaurant and user entities
-    const user = await addUserToRestaurant(userId);
+    const user = await addUserToRestaurant(userId, restaurant.restaurantId);
     // Return restaurant object created
     res.json({ restaurant });
   } catch (err) {

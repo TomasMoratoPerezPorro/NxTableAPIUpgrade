@@ -1,8 +1,8 @@
-const { createNewUserDb } = require('../database_access');
+const { createNewUserDb, userFindOneByEmailDb } = require('../database_access/userDb');
 const bcrypt = require('bcryptjs');
 
 const config = require('config');
-const { userFindOneByEmailDb } = require('../database_access');
+
 const signToken = require('../utils/signToken');
 
 const checkIfemailIsRegistered = async (email) => {

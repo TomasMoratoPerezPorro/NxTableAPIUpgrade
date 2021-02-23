@@ -1,5 +1,8 @@
-const { restaurantFindOneByNameDb } = require('../database_access');
-const { createNewUserRestaurantDb } = require('../database_access');
+const {
+  restaurantFindOneByNameDb,
+  createNewRestaurantDb,
+  createNewUserRestaurantDb
+} = require('../database_access/restaurantDb');
 
 const checkIfNameIsRegistered = async (name) => {
   try {

@@ -1,9 +1,9 @@
 const express = require('express');
-const auth = require('../middleware/auth');
+const { authMiddleware } = require('../middleware/auth');
 
-const { userController, authController } = require('../controllers');
+const { userController, authController, restaurantController } = require('../controllers');
 
-const { userValidator, authValidator } = require('../middleware/validators');
+const { userValidator, authValidator, restaurantValidator } = require('../middleware/validators');
 
 const router = express.Router();
 
@@ -12,5 +12,13 @@ router.post('/auth', authValidator.validateLogin, authController.loginUser);
 
 // USER
 router.post('/user', userValidator.validateUser, userController.registerNewUser);
+
+// RESTAURANT
+router.post(
+  '/restaurant',
+  authMiddleware,
+  restaurantValidator.validateRestaurantCreation,
+  restaurantController.registerNewRestaurant
+);
 
 module.exports = router;
