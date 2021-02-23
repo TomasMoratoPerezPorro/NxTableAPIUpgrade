@@ -21,10 +21,10 @@ const createNewRestaurantDb = async (name, description, streetType, streetName, 
   try {
     restaurantInstance = await Restaurant.create({
       name: name,
-      description: description,
-      streetType: streetType,
+      description: description
+      /* streetType: streetType,
       streetName: streetName,
-      streetNumber: streetNumber
+      streetNumber: streetNumber */
     });
 
     return restaurantInstance.toJSON();
@@ -35,7 +35,10 @@ const createNewRestaurantDb = async (name, description, streetType, streetName, 
 
 const createNewUserRestaurantDb = async (userId, restaurantId) => {
   try {
-    console.log('UserId IN DB' + userId);
+    console.log('UserId IN DB: ' + userId);
+    console.log('RestaurantId IN DB: ' + restaurantId);
+    console.log('-----------------');
+
     const userInstance = await User.findOne({
       where: { userId }
     });
