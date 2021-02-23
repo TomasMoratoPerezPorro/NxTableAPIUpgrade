@@ -1,7 +1,6 @@
 openapi: 3.0.0
 info:
-  description:
-    'This is a sample server for the Nxtable api.  You can find out more about
+  description: 'This is a sample server for the Nxtable api.  You can find out more about
     this project in the [GitHub page](https://github.com/TomasMoratoPerezPorro/NxTableAPIUpgrade) .
     For this sample, you can use the api key
     `special-key` to test the authorization filters.'
@@ -148,7 +147,7 @@ paths:
                   type: string
                 streetName:
                   type: string
-                number:
+                streetNumber:
                   type: string
       responses:
         '200':

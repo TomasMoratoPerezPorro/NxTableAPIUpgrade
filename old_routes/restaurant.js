@@ -31,9 +31,7 @@ router.post(
       });
 
       if (restaurant != null) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'This restaurant name already exists' }] });
+        return res.status(400).json({ errors: [{ msg: 'This restaurant name already exists' }] });
       }
 
       restaurant = Restaurant.build({
