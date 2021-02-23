@@ -7,7 +7,7 @@ const userFindOneByEmailDb = async (email) => {
     });
 
     if (!userInstance) {
-      throw new Error('User not found');
+      return;
     }
 
     return userInstance.toJSON();
