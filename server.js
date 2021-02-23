@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const routes = require('./routes');
 const errorHandler = require('./middleware/errorHanadler');
+const unknownEndpoint = require('./middleware/unknownEndpoint');
 
 //Init Middleware
 app.use(express.json({ extended: false }));
@@ -12,6 +13,9 @@ app.get('/', (req, res) => res.send('API Running'));
 
 // Define Routes
 app.use('/api', routes);
+
+// Handle indalid endpoints
+app.use(unknownEndpoint);
 
 // Hnaddle errors
 app.use(errorHandler);
