@@ -2,6 +2,7 @@ const { sequelize } = require('./database_models/models');
 const express = require('express');
 const app = express();
 const routes = require('./routes');
+const errorHandler = require('./middleware/errorHanadler');
 
 //Init Middleware
 app.use(express.json({ extended: false }));
@@ -11,6 +12,9 @@ app.get('/', (req, res) => res.send('API Running'));
 
 // Define Routes
 app.use('/api', routes);
+
+// Hnaddle errors
+app.use(errorHandler);
 
 /* app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));

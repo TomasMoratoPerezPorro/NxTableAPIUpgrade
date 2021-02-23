@@ -5,14 +5,14 @@ const config = require('config');
 const { userFindOneByEmailDb } = require('../database_access');
 const signToken = require('../utils/signToken');
 
-const userExists = async (email) => {
+const checkIfemailIsRegistered = async (email) => {
   try {
-    let user = await userFindOneByEmailDb(email);
+    const user = await userFindOneByEmailDb(email);
 
     if (user == null) {
       return false;
     } else {
-      throw new Error("{ errors: [{ msg: 'User already exists' }] }");
+      throw new Error('Email is already registered');
     }
   } catch (err) {
     throw new Error(err.message);
@@ -32,12 +32,7 @@ const encryptPassword = async (password) => {
 
 const createUser = async (email, encryptedPassword, firstName, lastName) => {
   try {
-    let user = await createNewUserDb(
-      email,
-      encryptedPassword,
-      firstName,
-      lastName
-    );
+    let user = await createNewUserDb(email, encryptedPassword, firstName, lastName);
 
     return user;
   } catch (err) {
@@ -61,7 +56,7 @@ const createToken = async (userId) => {
 };
 
 module.exports = {
-  userExists,
+  checkIfemailIsRegistered,
   encryptPassword,
   createUser,
   createToken

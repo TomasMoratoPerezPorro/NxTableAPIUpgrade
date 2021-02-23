@@ -8,7 +8,7 @@ const userIsRegistered = async (email) => {
     let user = await userFindOneByEmailDb(email);
 
     if (user == null) {
-      throw new Error("{ errors: [{ msg: 'Invalid credentials' }] }");
+      throw new Error('Invalid email');
     } else {
       return user;
     }
@@ -23,7 +23,7 @@ const matchPassword = async (inputPassword, dbPassword) => {
     const isMatch = await bcrypt.compare(inputPassword, dbPassword);
 
     if (!isMatch) {
-      throw new Error("{ errors: [{ msg: 'Invalid credentials' }] }");
+      throw new Error('Invalid password');
     } else {
       return isMatch;
     }

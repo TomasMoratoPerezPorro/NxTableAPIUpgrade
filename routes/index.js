@@ -11,6 +11,6 @@ const router = express.Router();
 router.post('/auth', authValidator.validateLogin, authController.loginUser);
 
 // USER
-router.post('/user', userValidator.validateUser, userController.postUser);
+router.post('/user', userValidator.validateUser, userController.registerNewUser);
 
 module.exports = router;
