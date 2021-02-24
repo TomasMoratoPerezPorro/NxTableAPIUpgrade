@@ -25,7 +25,7 @@ const userFindOneByEmailDb = async (email) => {
     });
 
     if (!userInstance) {
-      return;
+      return null;
     }
 
     return userInstance.toJSON();
