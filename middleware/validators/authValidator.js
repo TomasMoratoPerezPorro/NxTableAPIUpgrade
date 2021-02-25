@@ -1,5 +1,4 @@
 const { check, validationResult } = require('express-validator');
-const errorHandler = require('../errorHanadler');
 
 exports.validateLogin = [
   check('email', 'Please enter a valid email').isEmail(),
