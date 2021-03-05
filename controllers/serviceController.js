@@ -1,7 +1,7 @@
 const {
   checkIfServiceNameIsRegistered,
-  createService
-  /* createWeekServiceSchedule */
+  createService,
+  createWeekServiceSchedule
 } = require('../services/serviceService');
 
 const registerNewService = async (req, res, next) => {
@@ -11,7 +11,7 @@ const registerNewService = async (req, res, next) => {
 
     const service = await createService(restaurantId, name, comments, mealDurationTime);
 
-    /* const serviceSchedule = await createWeekServiceSchedule(weekSchedule); */
+    const serviceSchedule = await createWeekServiceSchedule(service.serviceId, weekSchedule);
 
     res.json({ service });
   } catch (err) {
